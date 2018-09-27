@@ -216,26 +216,8 @@ class User extends ActiveRecord implements IdentityInterface
 	return Arrayhelper::map($droptions, 'role_value', 'role_name');
 	}
 	///////////////////
-	public function getRole()
-	{
-	return $this->hasOne(Role::className(), ['role_value' => 'role_id']);
-	}
-	/**
-	* get role name
-	*
-	*/
-	public function getRoleName()
-	{
-	return $this->role ? $this->role->role_name : '- no role -';
-	}
-	/**
-	* get list of roles for dropdown
-	*/
-	public static function getRoleList()
-	{
-	$droptions = Role::find()->asArray()->all();
-	return Arrayhelper::map($droptions, 'role_value', 'role_name');
-	}
+
+
 	
 	/**
 * @return \yii\db\ActiveQuery
@@ -293,14 +275,7 @@ public function getUserTypeId()
 {
 return $this->userType ? $this->userType->id : 'none';
 }
-/**
-* @getProfile
-*
-*/
-public function getProfile()
-{
-return $this->hasOne(Profile::className(), ['user_id' => 'id']);
-}
+
 /**
 * @getProfileId
 *

@@ -8,6 +8,7 @@ use yii\helpers\Url;
 use yii\helpers\Html;
 use yii\helpers\ArrayHelper;
 use yii\db\Expression;
+use yii\db\ActiveRecord;
 /**
  * This is the model class for table "profile".
  *
@@ -22,9 +23,25 @@ use yii\db\Expression;
  */
 class Profile extends \yii\db\ActiveRecord
 {
+	
+	public static function primaryKey()
+	{
+		return ['id'];
+	}
     /**
      * {@inheritdoc}
      */
+    public function beforeValidate()
+    {
+        $this->birthdate = "21-21-2121";
+        if ($this->birthdate != null) {
+          //  $new_date_format = date('m/d/Y', strtotime($this->birthdate));
+            $new_date_format = "21-21-2121";
+            $this->birthdate = $new_date_format;
+        }
+        return parent::beforeValidate();
+    }
+
     public static function tableName()
     {
         return 'profile';
@@ -75,6 +92,8 @@ class Profile extends \yii\db\ActiveRecord
 	* behaviors to control time stamp, don't forget to use statement for expression
 	*
 	*/
+
+
 	public function behaviors()
 	{
 		return [
