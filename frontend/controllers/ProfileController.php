@@ -86,7 +86,7 @@ class ProfileController extends Controller
      * @return mixed
      * @throws NotFoundHttpException if the model cannot be found
      */
-    public function actionView($id)
+    public function actionView()
     {
         /*return $this->render('view', [
             'model' => $this->findModel($id),
@@ -149,6 +149,8 @@ class ProfileController extends Controller
         return $this->render('update', [
             'model' => $model,
         ]);*/
+
+        PermissionHelpers::requireUpgradeTo('Paid');
         if($model = Profile::find()->where(['user_id' =>
             Yii::$app->user->identity->id])->one()) {
             if ($model->load(Yii::$app->request->post()) && $model->save()) {
@@ -196,25 +198,5 @@ class ProfileController extends Controller
 
          throw new NotFoundHttpException('The requested page does not exist.');
      }
-
-    public function actionUpdate()
-    {
-        PermissionHelpers::requireUpgradeTo('Paid');
-        if ($model = Profile::find()->where(['user_id' =>
-            Yii::$app->user->identity->id])->one()) {
-            if ($model->load(Yii::$app->request->post()) && $model->save()) {
-                return $this->redirect(['view', 'id' => $model->id]);
-            } else {
-                return $this->render('update', [
-                    'model' => $model,
-                ]);
-            }
-        } else {
-            throw new NotFoundHttpException('No Such Profile.');
-        }
-    }
-
-
-
 
 }

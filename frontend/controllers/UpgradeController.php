@@ -45,7 +45,7 @@ class UpgradeController extends \yii\web\Controller
         return $this->render('index',['name' => $name]);
     }
 
-    public function actionUpdate4()
+  /*  public function actionUpdate()
     {
         PermissionHelpers::requireUpgradeTo('Paid');
         if ($model = Profile::find()->where(['user_id' =>
@@ -60,6 +60,6 @@ class UpgradeController extends \yii\web\Controller
         } else {
             throw new NotFoundHttpException('No Such Profile.');
         }
-    }
+    }*/
 
 }
